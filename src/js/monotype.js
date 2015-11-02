@@ -1,10 +1,10 @@
-class MonoType {
+class Monotype {
 
   constructor (el) {
     this.el = document.querySelector(el)
     this.text = this.el.innerText
     this.index = 0
-    this.duration = 50
+    this.duration = 30
     this.className = 'monotype__el'
   }
 
@@ -54,4 +54,4 @@ class MonoType {
   }
 }
 
-window.MonoType = module.exports = MonoType
+window.Monotype = module.exports = Monotype

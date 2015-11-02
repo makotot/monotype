@@ -3,13 +3,15 @@
 	<head>
 		<title>{{ title }}</title>
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+		<link rel="stylesheet" href="./css/index.css">
 	</head>
 	<body>
 		{{> body }}
 
 		<script src="./js/monotype.js"></script>
 		<script>
-			var monotype = new MonoType('#monotype-example-1');
+			var monotype = new Monotype('#monotype');
 
 			monotype.init()
 		</script>
