@@ -3,55 +3,61 @@ class Monotype {
   constructor (el) {
     this.el = document.querySelector(el)
     this.text = this.el.innerText
-    this.index = 0
-    this.duration = 30
-    this.className = 'monotype__el'
+    this.cachedText = this.text
+    this.caret = '_'
+    this.runner = null
+    this.speed = 100
+    this.adjustedValue = 60
+    this.flashSpeed = 600
+    this.count = 0
   }
 
   init () {
-    this.render(this.createTemplate())
-    this.play()
+    this.run()
   }
 
-  createTemplate () {
-    let textList = this.text.split('')
-
-    return textList.map((text, index) => {
-      return `<span class="${this.className} ${this.className}--${index}" style="visibility:hidden;">${text}</span>`
-    })
+  createInterval () {
+    return Math.floor(Math.random() * this.adjustedValue) + this.speed
   }
 
-  render (list) {
-    let innerText = ''
-
-    list.forEach((item) => {
-      innerText += item
-    })
-
-    this.el.innerHTML = innerText
+  type (caret = this.caret) {
+    return this.text.substr(0, this.count) + caret
   }
 
-  play () {
-    const items = this.el.querySelectorAll('.' + this.className)
-    const itemNum = items.length
+  flicker (status) {
+    this.render(this.type(status ? this.caret : ''))
+  }
+
+  wait (isCaretShown = false) {
 
     this.runner = setTimeout(() => {
-      if (this.index < itemNum) {
-        this.play()
-      } else {
-        this.pause()
-      }
-      this.index++
-    }, this.duration);
+      this.wait(!isCaretShown)
+      this.flicker(isCaretShown)
+    }, this.flashSpeed)
+  }
 
-    for (let i = 0; i < itemNum; i++) {
-      items[i].style.visibility = i <= this.index ? '' : 'hidden'
-    }
+  render (text = '') {
+    this.el.innerText = text
   }
 
   pause () {
     this.runner = null
   }
+
+  run () {
+    this.runner = setTimeout(() => {
+      if (this.text.length >= this.count) {
+        this.run()
+        this.render(this.type())
+        this.count++;
+      } else {
+        this.pause()
+        this.wait()
+      }
+    }, this.createInterval())
+  }
+
 }
 
 window.Monotype = module.exports = Monotype
+
