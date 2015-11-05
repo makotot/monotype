@@ -82,7 +82,15 @@ module.exports = function (grunt) {
 
     browserify: {
       options: {
+        browserifyOptions: {
+          debug: true
+        },
         standalone: 'MonoType',
+        plugin: [
+          [
+            'minifyify'
+          ]
+        ],
         transform: [
           [
             'babelify',
