@@ -55,13 +55,11 @@ class Monotype {
         this.render(this.type())
         this.count++;
       } else {
+        this.pause()
         this.resolve()
-        //this.pause()
-        //this.wait()
       }
     }, this.createInterval())
   }
-
 }
 
 window.Monotype = module.exports = Monotype
