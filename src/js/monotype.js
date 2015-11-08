@@ -10,10 +10,14 @@ class Monotype {
     this.adjustedValue = 60
     this.flashSpeed = 600
     this.count = 0
+    this.resolve = null
   }
 
-  init () {
-    this.run()
+  typeAll () {
+    return new Promise((resolve, reject) => {
+      this.resolve = resolve
+      this.run()
+    })
   }
 
   createInterval () {
@@ -24,7 +28,7 @@ class Monotype {
     return this.text.substr(0, this.count) + caret
   }
 
-  flicker (status) {
+  blink (status) {
     this.render(this.type(status ? this.caret : ''))
   }
 
@@ -32,7 +36,7 @@ class Monotype {
 
     this.runner = setTimeout(() => {
       this.wait(!isCaretShown)
-      this.flicker(isCaretShown)
+      this.blink(isCaretShown)
     }, this.flashSpeed)
   }
 
@@ -51,8 +55,9 @@ class Monotype {
         this.render(this.type())
         this.count++;
       } else {
-        this.pause()
-        this.wait()
+        this.resolve()
+        //this.pause()
+        //this.wait()
       }
     }, this.createInterval())
   }
