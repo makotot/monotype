@@ -26,7 +26,7 @@
     "browserify": "^12.0.1",
     "cssnano": "^3.3.2",
     "deglobalify": "^0.2.0",
-    "eslint-config-makotot": "0.0.4",
+    "eslint-config-makotot": "0.0.5",
     "grunt": "^0.4.5",
     "grunt-assemble": "^0.4.0",
     "grunt-browser-sync": "^2.1.3",
