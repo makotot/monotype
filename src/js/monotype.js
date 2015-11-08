@@ -8,7 +8,7 @@ class Monotype {
     this.runner = null
     this.speed = 100
     this.adjustedValue = 60
-    this.flashSpeed = 600
+    this.blinkSpeed = 600
     this.count = 0
     this.resolve = null
   }
@@ -37,7 +37,7 @@ class Monotype {
     this.runner = setTimeout(() => {
       this.wait(!isCaretShown)
       this.blink(isCaretShown)
-    }, this.flashSpeed)
+    }, this.blinkSpeed)
   }
 
   render (text = '') {
