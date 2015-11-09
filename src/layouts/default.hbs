@@ -16,7 +16,10 @@
 			monotype
 				.typeAll()
 				.then(() => {
-					monotype.wait()
+					return monotype.wait()
+				})
+				.then(() => {
+					return monotype.deleteAll()
 				})
 		</script>
 	</body>

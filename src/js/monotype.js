@@ -53,7 +53,27 @@ class Monotype {
       if (this.text.length >= this.count) {
         this.run()
         this.render(this.type())
-        this.count++;
+        this.count++
+      } else {
+        this.pause()
+        this.resolve()
+      }
+    }, this.createInterval())
+  }
+
+  deleteAll () {
+    return new Promise((resolve, reject) => {
+      this.resolve = resolve
+      this.runDelete()
+    })
+  }
+
+  runDelete () {
+    this.runner = setTimeout(() => {
+      if (this.count >= 0) {
+        this.runDelete()
+        this.render(this.type())
+        this.count--
       } else {
         this.pause()
         this.resolve()
